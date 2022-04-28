@@ -8,20 +8,14 @@ namespace PointOfSale
 {
      class Product
     {
-        public enum Category
-        {
-            Produce,
-            Dairy, 
-            Snacks,
-            Bread
-        }
-        string name { get; set; }
-        Category category { get; set; }  
-        string description { get; set; }
-        double price {  get; set; }
+     
+      public  string name { get; set; }
+      public  string category { get; set; }  
+      public  string description { get; set; }
+      public  double price {  get; set; }
         
         
-        public Product(string name, Category category, string description, double price)
+        public Product(string name, string category, string description, double price)
         {
             this.name = name; 
             this.category = category;
