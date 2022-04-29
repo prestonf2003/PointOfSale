@@ -8,6 +8,10 @@ namespace PointOfSale
 {
     class CCPay : PaymentMethod
     {
+        public CCPay(double subTotal, double salesTax, double grandTotal, string Payment) : base(subTotal, salesTax, grandTotal, Payment)
+        {
+        }
+
         public int CCNumber { get; set; }
         public DateTime Expiration { get; set; }
 
@@ -18,11 +22,10 @@ namespace PointOfSale
         {
             base.GetTotal();
 
-            if (HowtoPay == "credit card") ;
+           if(CCNumbers() == true && JustCVV() == true && ExpDateCheck() == true)
             {
-
-                CCNumbers();
-            }
+                Console.WriteLine("That Info is correct have a good day");
+            } 
 
 
             //if (CCNumber.Length == 16)
@@ -78,7 +81,7 @@ namespace PointOfSale
                 string CCNums = Console.ReadLine();
                 if (CCNums.Length == 16)
                 {
-                    int CCNumber = int.Parse(CCNums);
+                    
                     return true;
                 }
 
@@ -119,29 +122,35 @@ namespace PointOfSale
                 else
                 {
                     Console.WriteLine("I'm sorry. That CVV number doesn't seem to be accurate.");
-                    GetUserInput("Please enter yes to re-enter the CVV or no to start over with a new card. ").ToLower();
-                    if (true)
-                    {
-                        return JustCVV();
-                    }
-                    else
-                    {
-                        return CCNumbers();
-                    }
-                }
-            }
-             bool DateTimeVeri()
-            {
-                GetUserInput("What is the expiration date");
-                Expiration = DateTime.Parse(Console.ReadLine());
-                if(Expiration >= DateTime.Today)
-                {
-                    return true;
+                  string repeat = GetUserInput("Please enter yes to re-enter the CVV or no to start over with a new card. ").ToLower();
+                if (repeat.Contains("y")){ 
+                    return JustCVV();
                 }
                 else
                 {
                     return false;
+                    return CCNumbers();
                 }
+                }
+            }
+             bool ExpDateCheck()
+            {
+            int m = DateTime.Today.Month;
+            int y = DateTime.Today.Year;
+            int expm = int.Parse(GetUserInput("Please enter in you month in single digit or double digit if greater than 9"));
+            int expy = int.Parse(GetUserInput("Please enter the year of expiration in 4 digits"));
+         if(expy > y)
+            {
+                return true;
+            }
+         else if(expy == y && expm >= m)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
 
             }
         }

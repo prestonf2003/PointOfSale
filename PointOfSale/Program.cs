@@ -1,24 +1,31 @@
 
+
 using System.Collections.Generic;
+
 
 namespace PointOfSale
 {
     public class Program
     {
+
+
         public static List<double> subtotal = new List<double>();
-        public static string itemQuantity;
+
+       
+
         public static List<string> Cart = new List<string>();
         public static List<double> Sale = new List<double>();
-     
-       
+
+
         public static void Main()
         {
-            
-            
-             Product bagOfOranges = new Product("Bag Of Oranges", "produce", "8 pound bag of oranges", 6.99);
+
+
+            Product bagOfOranges = new Product("Bag Of Oranges", "produce", "8 pound bag of oranges", 6.99);
+
             Product bagOfLimes = new Product("Bag of Limes", "produce", "1 pound bag of key limes", 3.99);
             Product bagOfSpinach = new Product("Bag of Spinach", "produce", "10 ounce bag of spinach", 2.18);
-            
+
             Product PopcornBag = new Product("Microwave Popcorn", "snacks", "Cousin WIllies Butter Explosion 3 pack microwave popcorn", 2.29);
             Product BagOfPretzels = new Product("Bag of Pretzels", "snacks", "Bag of dots original seasonzed pretzels 16 ounces", 5.99);
             Product Cheezits = new Product("Box of Cheez-Its", "snacks", "21 0unce family size box of original cheez its", 4.54);
@@ -30,8 +37,8 @@ namespace PointOfSale
             Product GallonOfMilk = new Product("Gallon of 2% Milk", "dairy", "Gallon of fairlife 2% milk", 3.98);
             Product PackOfYogurt = new Product("Yoplait Yogurt", "dairy", "8 pack of Yoplait Strawberry and Banana Yogurt", 4.36);
             Product CoffeeCreamer = new Product("Carmel Macchiato Creamer", "dairy", "32 ounce container of Internation delight coffee creamer", 3.24);
-            
-            
+
+
             List<Product> bread = new List<Product>();
             bread.Add(WhiteBread);
             bread.Add(SourDough);
@@ -51,11 +58,13 @@ namespace PointOfSale
             snacks.Add(PopcornBag);
             snacks.Add(BagOfPretzels);
             snacks.Add(Cheezits);
-       
+
+
+
             bool goAgain = true;
             while (goAgain)
             {
-                
+
                 string input = GetUserInput("Which aisle would you like to shop in? Bread, Dairy, Produce, or Snacks?").ToLower().Trim();
                 if (input == "bread")
                 {
@@ -72,7 +81,7 @@ namespace PointOfSale
                     subtotal.Add(price);
                     Cart.Add(Chosen.name);
                     Sale.Add(price);
-                    Console.WriteLine($"Your Total Is{price}");
+
 
                 }
                 if (input == "dairy")
@@ -90,7 +99,7 @@ namespace PointOfSale
                     subtotal.Add(price);
                     Cart.Add(Chosen.name);
                     Sale.Add(price);
-                    Console.WriteLine($"Your Total Is{price}");
+
 
                 }
                 if (input == "snacks")
@@ -108,7 +117,7 @@ namespace PointOfSale
                     subtotal.Add(price);
                     Cart.Add(Chosen.name);
                     Sale.Add(price);
-                    Console.WriteLine($"Your Total Is {price}");
+
                 }
                 if (input == "produce")
                 {
@@ -126,11 +135,13 @@ namespace PointOfSale
                     subtotal.Add(price);
                     Cart.Add(Chosen.name);
                     Sale.Add(price);
-                    Console.WriteLine($"Your Total Is{price}");
+
+
 
                 }
-             
+
                 goAgain = AddMore();
+
             }
         }
         public static string GetUserInput(string prompt)
@@ -139,26 +150,26 @@ namespace PointOfSale
             string input = Console.ReadLine();
             return input;
         }
-        public static void GetSnack(string input)
-        {
-          
-        }
+
 
         static bool AddMore()
         {
-            
+
             double sum = subtotal.Sum();
-            PrintCart();
+
             Console.WriteLine();
             Console.WriteLine($"Your subtotal is: ${sum}");
-           
+
+
             string answer = GetUserInput("Would you like to add more items to your cart? Please enter y/n").ToLower();
 
             if (answer == "y" || answer == "yes")
                 return true;
             else if (answer == "n" || answer == "no")
             {
-                
+                PrintCart();
+                GetPayment();
+                Console.WriteLine("Thank you for shopping at *insert store name* please come again");
                 return false;
             }
             else
@@ -166,18 +177,51 @@ namespace PointOfSale
                 Console.WriteLine("I'm sorry I didn't understand that response. Please enter y or n");
                 return AddMore();
 
+
             }
 
         }
+
         public static void PrintCart()
         {
-       for(int i = 0; i < Cart.Count; i++)
+            for (int i = 0; i < Cart.Count; i++)
             {
-                double round = Math.Round(Sale[i]);
+                double round = Math.Round(Sale[i], 2);
                 Console.WriteLine(Cart[i] + " " + "$" + round);
-                
+
             }
         }
-      
+        public static void GetPayment()
+        {
+
+            double grandTotal = subtotal.Sum() * 1.06;
+            double roundedTotal = Math.Round(grandTotal, 2);
+            Console.WriteLine($"Your grand total for today is: {roundedTotal}");
+            string payment = GetUserInput("How would you like to pay").Trim().ToLower();
+
+
+            if (payment == "check")
+            {
+                CheckPay check = new CheckPay(subtotal.Sum(), 0.06, roundedTotal, payment);
+                check.GetTotal();
+            }
+            else if (payment.Contains("credit"))
+            {
+                CCPay Card = new CCPay(subtotal.Sum(), 0.06, roundedTotal, payment);
+
+                Card.GetTotal();
+            }
+            else if (payment == "cash")
+            {
+                CashPay cash = new CashPay(subtotal.Sum(), 0.06, roundedTotal, payment);
+                cash.GetTotal();
+            }
+            else
+            {
+                return;
+            }
+        }
+
+
     }
 }
