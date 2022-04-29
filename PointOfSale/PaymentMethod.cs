@@ -11,8 +11,15 @@ namespace PointOfSale
         public double Subtotal { get; set; }
         public double SalesTax { get; set; }
         public double Grandtotal { get; set; }
-        public string HowtoPay { get; set; }
+        public string Payment { get; set; }
+        public PaymentMethod(double subTotal, double salesTax,double grandTotal, string Payment)
+        {
+            this.Subtotal = subTotal;
+            this.SalesTax = salesTax;
+            this.Grandtotal = grandTotal;
+            this.Payment = Payment;
 
+        }
         public virtual void GetTotal()
         {
             SalesTax = Subtotal * 0.06;
