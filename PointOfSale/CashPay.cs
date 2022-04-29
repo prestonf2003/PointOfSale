@@ -29,6 +29,7 @@ namespace PointOfSale
                 Change = Cash - Grandtotal;
                 Console.WriteLine($"Your change is {Math.Round(Change, 2)}");
             }
+          
         }
         }
     }
