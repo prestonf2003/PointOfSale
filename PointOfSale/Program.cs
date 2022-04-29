@@ -8,14 +8,7 @@ namespace PointOfSale
     public class Program
     {
 
-        public static string itemQuantity;
-        public static List<double> subtotal = new List<double>();
-       
-        
-        public static void Main()
-        {
-            
-            Product bagOfOranges = new Product("Bag Of Oranges", "produce", "8 pound bag of oranges", 6.99);
+
 
         public static List<double> subtotal = new List<double>();
         public static string itemQuantity;
