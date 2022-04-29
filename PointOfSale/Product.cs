@@ -13,25 +13,30 @@ namespace PointOfSale
       public  string category { get; set; }  
       public  string description { get; set; }
       public  double price {  get; set; }
-        
-        
+      
+
+
         public Product(string name, string category, string description, double price)
         {
-            this.name = name; 
+            this.name = name;
             this.category = category;
             this.description = description;
             this.price = price;
             
-        }
 
-        public virtual void PrintInfo()
+        }
+        public  void PrintInfo()
         {
             Console.WriteLine(category);
             Console.WriteLine(name);
             Console.WriteLine(description);
             Console.WriteLine(price);
             Console.WriteLine();
+
+
         }
+
+
     }
   
 }
