@@ -4,6 +4,8 @@ namespace PointOfSale
     public class Program
     {
         public static string itemQuantity;
+        public static List<double> subtotal = new List<double>();
+       
         
         public static void Main()
         {
@@ -53,6 +55,13 @@ namespace PointOfSale
                     Product p = bread[i];
                     Console.WriteLine((i+1)+" "+p.name + " " + "$" + p.price);
                 }
+                Console.WriteLine();
+                int chosenItem = int.Parse(GetUserInput("Which item would you like to add to your cart?"));
+                Product chosen = bread[chosenItem - 1];
+                int quantityWanted = int.Parse(GetUserInput("How many would you like?"));
+                double lineTotal = chosen.price * quantityWanted;
+                subtotal.Add(lineTotal);
+                Console.WriteLine($"Your total is {lineTotal}");
             }
             if(input == "dairy")
             {
@@ -61,6 +70,13 @@ namespace PointOfSale
                     Product p = dairy[i];
                     Console.WriteLine((i+1) + " " + p.name + " " + "$" + p.price);
                 }
+                Console.WriteLine();
+                int chosenItem = int.Parse(GetUserInput("Which item would you like to add to your cart?"));
+                Product chosen = bread[chosenItem - 1];
+                int quantityWanted = int.Parse(GetUserInput("How many would you like?"));
+                double lineTotal = chosen.price * quantityWanted;
+                subtotal.Add(lineTotal);
+                Console.WriteLine($"Your total is {lineTotal}");
             }
             if(input == "produce")
             {
@@ -69,6 +85,13 @@ namespace PointOfSale
                     Product p = produce[i];
                     Console.WriteLine((i + 1) + " " + p.name + " " + "$" + p.price);
                 }
+                Console.WriteLine();
+                int chosenItem = int.Parse(GetUserInput("Which item would you like to add to your cart?"));
+                Product chosen = bread[chosenItem - 1];
+                int quantityWanted = int.Parse(GetUserInput("How many would you like?"));
+                double lineTotal = chosen.price * quantityWanted;
+                subtotal.Add(lineTotal);
+                Console.WriteLine($"Your total is {lineTotal}");
             }
             if(input == "snacks")
             {
@@ -77,19 +100,17 @@ namespace PointOfSale
                     Product p = snacks[i];
                     Console.WriteLine((i + 1) + " " + p.name + " " + "$" + p.price);
                 }
-            }
-
-
-
-
-
-
-
-
-
-
-
-
+                Console.WriteLine();
+                int chosenItem = int.Parse(GetUserInput("Which item would you like to add to your cart?"));
+                Product chosen = bread[chosenItem - 1];
+                int quantityWanted = int.Parse(GetUserInput("How many would you like?"));
+                double lineTotal = chosen.price * quantityWanted;
+                subtotal.Add(lineTotal);
+                Console.WriteLine($"Your total is {lineTotal}");
+            }     
+                        
+            
+                               
 
 
 
@@ -103,6 +124,8 @@ namespace PointOfSale
 
         static bool AddMore()
         {
+            double sum = subtotal.Sum();
+            Console.WriteLine(sum);
             string answer = GetUserInput("Would you like to add more items to your cart? Please enter y/n").ToLower();
 
             if (answer == "y" || answer == "yes")
