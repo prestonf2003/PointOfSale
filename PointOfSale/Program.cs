@@ -4,6 +4,11 @@ namespace PointOfSale
     public class Program
     {
         public static string itemQuantity;
+        public static List<double> subtotal= new List<double>();
+
+        public static List<string> Cart = new List<string>();
+
+        public static List<double> Sale = new List<double>();
         
         public static void Main()
         {
@@ -79,7 +84,17 @@ namespace PointOfSale
                     Console.WriteLine((i + 1) + " " + p.name + " " + "$" + p.price);
                 }
             }
+            Console.WriteLine(PaymentMethod.Gettotal());
 
+        }
+        public static void PrintCart()
+        {
+            for (int i = 0; i < Cart.Count; i++)
+            {
+                double round = Math.Round(Sale[i]);
+                Console.WriteLine(Cart[i] + " " + "$" + round);
+
+            }
         }
         public static string GetUserInput(string prompt)
         {
@@ -107,11 +122,6 @@ namespace PointOfSale
             }
 
         }
-        public static string GetUserInput(string prompt)
-        {
-            Console.WriteLine(prompt);
-            string input = Console.ReadLine();
-            return input;
-        }        
+
     }
 }

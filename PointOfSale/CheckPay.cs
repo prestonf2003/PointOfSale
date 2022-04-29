@@ -10,7 +10,7 @@ namespace PointOfSale
     {
         public int CheckNum { get; set; }
 
-        public override void GetTotal()
+        public override double GetTotal()
         {
             base.GetTotal();
 

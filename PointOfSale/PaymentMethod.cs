@@ -13,10 +13,11 @@ namespace PointOfSale
         public double Grandtotal { get; set; }
         public string HowtoPay { get; set; }
 
-        public virtual void GetTotal()
+        public virtual double GetTotal()
         {
             SalesTax = Subtotal * 0.06;
             Grandtotal = Subtotal + SalesTax;
+            return Grandtotal;
             
         }
         
