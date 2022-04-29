@@ -107,11 +107,6 @@ namespace PointOfSale
             }
 
         }
-        public static string GetUserInput(string prompt)
-        {
-            Console.WriteLine(prompt);
-            string input = Console.ReadLine();
-            return input;
-        }        
+        
     }
 }
