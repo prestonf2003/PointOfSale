@@ -15,7 +15,8 @@ namespace PointOfSale
 
         public static List<string> Cart = new List<string>();
         public static List<double> Sale = new List<double>();
-
+        public static List<double> Quantities = new List<double>();
+        public static double grandTotal;
 
         public static void Main()
         {
@@ -66,80 +67,35 @@ namespace PointOfSale
             {
 
                 string input = GetUserInput("Which aisle would you like to shop in? Bread, Dairy, Produce, or Snacks?").ToLower().Trim();
-                if (input == "bread")
+                switch (input)
                 {
-                    for (int i = 0; i < bread.Count; i++)
-                    {
-                        Product p = bread[i];
-                        Console.WriteLine((i + 1) + " " + p.name + " " + "$" + p.price);
-                    }
-                    Console.WriteLine();
-                    int ChooseItem = int.Parse(GetUserInput("Which Item would you like"));
-                    Product Chosen = bread[ChooseItem - 1];
-                    int QuantityWanted = int.Parse(GetUserInput("How Many"));
-                    double price = Chosen.price * QuantityWanted;
-                    subtotal.Add(price);
-                    Cart.Add(Chosen.name);
-                    Sale.Add(price);
-
+                    case "bread":
+                        {
+                           SelectProduct(bread);
+                        }
+                        break;
+                    case "dairy":
+                        {
+                            SelectProduct(dairy);
+                        }
+                        break;
+                    case "produce":
+                        {
+                            SelectProduct(produce);
+                        }
+                        break;
+                    case "snacks":
+                        {
+                            SelectProduct(snacks);
+                        }
+                        break;
+                     default:
+                        Console.WriteLine("That is not an acceptable Product please select again");
+                        return;
+                        break;
 
                 }
-                if (input == "dairy")
-                {
-                    for (int i = 0; i < dairy.Count; i++)
-                    {
-                        Product p = dairy[i];
-                        Console.WriteLine((i + 1) + " " + p.name + " " + "$" + p.price);
-                    }
-                    Console.WriteLine();
-                    int ChooseItem = int.Parse(GetUserInput("Which Item would you like"));
-                    Product Chosen = dairy[ChooseItem - 1];
-                    int QuantityWanted = int.Parse(GetUserInput("How Many"));
-                    double price = Chosen.price * QuantityWanted;
-                    subtotal.Add(price);
-                    Cart.Add(Chosen.name);
-                    Sale.Add(price);
-
-
-                }
-                if (input == "snacks")
-                {
-                    for (int i = 0; i < snacks.Count; i++)
-                    {
-                        Product p = snacks[i];
-                        Console.WriteLine((i + 1) + " " + p.name + " " + "$" + p.price);
-
-                    }
-                    int ChooseItem = int.Parse(GetUserInput("Which Item would you like"));
-                    Product Chosen = snacks[ChooseItem - 1];
-                    int QuantityWanted = int.Parse(GetUserInput("How Many"));
-                    double price = Chosen.price * QuantityWanted;
-                    subtotal.Add(price);
-                    Cart.Add(Chosen.name);
-                    Sale.Add(price);
-
-                }
-                if (input == "produce")
-                {
-                    for (int i = 0; i < produce.Count; i++)
-                    {
-                        Product p = produce[i];
-                        Console.WriteLine((i + 1) + " " + p.name + " " + "$" + p.price);
-
-                    }
-                    Console.WriteLine();
-                    int ChooseItem = int.Parse(GetUserInput("Which Item would you like"));
-                    Product Chosen = produce[ChooseItem - 1];
-                    int QuantityWanted = int.Parse(GetUserInput("How Many"));
-                    double price = Chosen.price * QuantityWanted;
-                    subtotal.Add(price);
-                    Cart.Add(Chosen.name);
-                    Sale.Add(price);
-
-
-
-                }
-
+ 
                 goAgain = AddMore();
 
             }
@@ -187,41 +143,68 @@ namespace PointOfSale
             for (int i = 0; i < Cart.Count; i++)
             {
                 double round = Math.Round(Sale[i], 2);
-                Console.WriteLine(Cart[i] + " " + "$" + round);
+                double salesTax = Math.Round(subtotal.Sum() * 1.06, 2);
+                 grandTotal = Math.Round(salesTax + round, 2);
+                foreach (string product in Cart)
+                {
+                    Console.WriteLine($"{Cart[i]} x{Quantities[i]}  ${Math.Round(Sale[i], 2)}");
+                    i++;
+                }
+                Console.WriteLine($"SubTotal ${subtotal.Sum()}");
+                Console.WriteLine($"Sales tax ${salesTax}");
+                Console.WriteLine($"Grand Total${grandTotal}");
+                
 
             }
         }
         public static void GetPayment()
         {
 
-            double grandTotal = subtotal.Sum() * 1.06;
-            double roundedTotal = Math.Round(grandTotal, 2);
-            Console.WriteLine($"Your grand total for today is: {roundedTotal}");
+         
+            
             string payment = GetUserInput("How would you like to pay").Trim().ToLower();
 
 
             if (payment == "check")
             {
-                CheckPay check = new CheckPay(subtotal.Sum(), 0.06, roundedTotal, payment);
+                CheckPay check = new CheckPay(subtotal.Sum(), 0.06, grandTotal, payment);
                 check.GetTotal();
             }
             else if (payment.Contains("credit"))
             {
-                CCPay Card = new CCPay(subtotal.Sum(), 0.06, roundedTotal, payment);
+                CCPay Card = new CCPay(subtotal.Sum(), 0.06, grandTotal, payment);
 
                 Card.GetTotal();
             }
             else if (payment == "cash")
             {
-                CashPay cash = new CashPay(subtotal.Sum(), 0.06, roundedTotal, payment);
+                CashPay cash = new CashPay(subtotal.Sum(), 0.06, grandTotal, payment);
                 cash.GetTotal();
             }
             else
             {
-                return;
+                Console.WriteLine("You didnt enter a payment Method");
+                GetPayment();
             }
         }
-
+       static void SelectProduct(List<Product> productList)
+        {
+            for (int i = 0; i < productList.Count; i++)
+            {
+                Product p = productList[i];
+                Console.WriteLine((i + 1) + " " + p.name + " " + "$" + p.price);
+            }
+            Console.WriteLine();
+            int ChooseItem = int.Parse(GetUserInput("Which Item would you like"));
+            Product Chosen = productList[ChooseItem - 1];
+            int QuantityWanted = int.Parse(GetUserInput("How Many"));
+            double price = Chosen.price * QuantityWanted;
+            subtotal.Add(price);
+            Quantities.Add(QuantityWanted);
+            Cart.Add(Chosen.name);
+            Sale.Add(price);
+           
+        }
 
     }
 }

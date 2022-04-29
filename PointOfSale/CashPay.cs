@@ -29,6 +29,7 @@ namespace PointOfSale
                 Change = Cash - Grandtotal;
                 Console.WriteLine($"Your change is {Math.Round(Change, 2)}");
             }
+
             else if (Cash == Grandtotal)
             {
                 Console.WriteLine("Thanks for shopping with us! Have a great day!");
@@ -38,6 +39,7 @@ namespace PointOfSale
                 Console.WriteLine("I'm sorry that's not the correct amount. Please pay the full amount");
                 GetTotal();
             }
+
         }
         }
     }
