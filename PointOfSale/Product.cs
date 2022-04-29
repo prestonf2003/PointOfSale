@@ -25,18 +25,15 @@ namespace PointOfSale
             
 
         }
-        public  void PrintInfo()
+
+        public virtual void PrintInfo()
         {
             Console.WriteLine(category);
             Console.WriteLine(name);
             Console.WriteLine(description);
             Console.WriteLine(price);
             Console.WriteLine();
-
-
         }
-
-
     }
   
 }
