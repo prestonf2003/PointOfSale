@@ -184,6 +184,7 @@ namespace PointOfSale
             }
 
         }
+
         public static void PrintCart()
         {
        for(int i = 0; i < Cart.Count; i++)
@@ -194,6 +195,7 @@ namespace PointOfSale
             }
         }
       
+
 
     }
 }
