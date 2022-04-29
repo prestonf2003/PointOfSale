@@ -16,6 +16,9 @@ namespace PointOfSale
         public DateTime Expiration { get; set; }
 
         public int CVV { get; set; }
+        public static string CCNums { get; set; }
+        public static string CVVNums { get; set; }
+        public static string exp { get; set; }
 
 
         public override void GetTotal()
@@ -24,8 +27,13 @@ namespace PointOfSale
 
            if(CCNumbers() == true && JustCVV() == true && ExpDateCheck() == true)
             {
+              
                 Console.WriteLine("That Info is correct have a good day");
-            } 
+            }
+            else
+            {
+                Program.GetPayment();
+            }
 
 
             //if (CCNumber.Length == 16)
@@ -66,6 +74,12 @@ namespace PointOfSale
 
             //    Console.WriteLine("Sorry that isn't a valid credit card number. Please input your card again.");
         }
+        public void PrintInfo()
+        {
+            Console.WriteLine(CCNums);
+            Console.WriteLine(CVVNums);
+            Console.WriteLine(exp);
+        }
 
             static string GetUserInput(string prompt)
             {
@@ -78,7 +92,7 @@ namespace PointOfSale
             static bool CCNumbers()
             {
                 Console.WriteLine("Please enter your credit card number.");
-                string CCNums = Console.ReadLine();
+                    CCNums = Console.ReadLine();
                 if (CCNums.Length == 16)
                 {
                     
@@ -113,10 +127,10 @@ namespace PointOfSale
             static bool JustCVV()
             {
                 Console.WriteLine("And what is the CVV number?");
-                string CVVNumber = Console.ReadLine();
-                if (CVVNumber.Length == 3)
+                string CVVNums = Console.ReadLine();
+                if (CVVNums.Length == 3)
                 {
-                    int CVV2 = int.Parse(CVVNumber);
+                    int CVV2 = int.Parse(CVVNums);
                     return true;
                 }
                 else
@@ -151,8 +165,9 @@ namespace PointOfSale
             {
                 return false;
             }
-
-            }
+             exp = expm + "-" + expy;
+        }
+            
         }
 
 

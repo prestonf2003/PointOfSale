@@ -13,11 +13,11 @@ namespace PointOfSale
             
         }
 
-        public double Cash { get; set; }
-        public double Change { get; set; }
+        public static double Cash { get; set; }
+        public static double Change { get; set; }
 
 
-
+    
         public override void GetTotal()
         {
             
@@ -26,8 +26,8 @@ namespace PointOfSale
             Cash = double.Parse(Console.ReadLine());
             if (Cash > Grandtotal)
             {
-                Change = Cash - Grandtotal;
-                Console.WriteLine($"Your change is {Math.Round(Change, 2)}");
+                Change = Math.Round(Cash - Grandtotal, 2);
+                Console.WriteLine($"Your change is {Change}");
             }
 
             else if (Cash == Grandtotal)
@@ -41,6 +41,11 @@ namespace PointOfSale
             }
 
         }
+        public void PrintInfo()
+        {
+            Console.WriteLine($"Cash Recieved{Cash}");
+            Console.WriteLine($"Cash Returned {Change}");
         }
+    }
     }
 

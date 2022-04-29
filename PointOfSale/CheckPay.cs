@@ -12,7 +12,7 @@ namespace PointOfSale
         {
         }
 
-        public int CheckNum { get; set; }
+        public static string CheckNum { get; set; }
 
         public override void GetTotal()
         {
@@ -22,8 +22,8 @@ namespace PointOfSale
             
                 Console.WriteLine("Please enter the check amount.");
                 
-                CheckNum = int.Parse(Console.ReadLine());
-                if(CheckNum == Grandtotal)
+                CheckNum = (Console.ReadLine());
+                if(CheckNum.Length == 4 )
                 {
                     Console.WriteLine("Alright Thank you");
                 }
@@ -32,7 +32,12 @@ namespace PointOfSale
                     Console.WriteLine("Sorry we cannot accept this check please input another form of payment");
                      Program.GetPayment();
                 }
+
             }
+        public void PrintInfo()
+        {
+            Console.WriteLine(CheckNum);
+        }
         }
     }
 
