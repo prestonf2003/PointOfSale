@@ -7,6 +7,7 @@ namespace PointOfSale
         
         public static void Main()
         {
+
             
             Product bagOfOranges = new Product("Bag Of Oranges", "produce", "8 pound bag of oranges", 6.99);
             Product bagOfLimes = new Product("Bag of Limes", "produce", "1 pound bag of key limes", 3.99);
@@ -79,20 +80,6 @@ namespace PointOfSale
                 }
             }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         }
         public static string GetUserInput(string prompt)
         {
@@ -116,8 +103,15 @@ namespace PointOfSale
             {
                 Console.WriteLine("I'm sorry I didn't understand that response. Please enter y or n");
                 return AddMore();
+
             }
 
         }
+        public static string GetUserInput(string prompt)
+        {
+            Console.WriteLine(prompt);
+            string input = Console.ReadLine();
+            return input;
+        }        
     }
 }
