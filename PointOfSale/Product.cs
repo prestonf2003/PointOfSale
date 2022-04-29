@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +22,15 @@ namespace PointOfSale
             this.description = description;
             this.price = price;
             
+        }
+
+        public virtual void PrintInfo()
+        {
+            Console.WriteLine(category);
+            Console.WriteLine(name);
+            Console.WriteLine(description);
+            Console.WriteLine(price);
+            Console.WriteLine();
         }
     }
   
