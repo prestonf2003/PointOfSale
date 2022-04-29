@@ -1,10 +1,22 @@
 
+
 using System.Collections.Generic;
+
 
 namespace PointOfSale
 {
     public class Program
     {
+
+        public static string itemQuantity;
+        public static List<double> subtotal = new List<double>();
+       
+        
+        public static void Main()
+        {
+            
+            Product bagOfOranges = new Product("Bag Of Oranges", "produce", "8 pound bag of oranges", 6.99);
+
         public static List<double> subtotal = new List<double>();
         public static string itemQuantity;
         public static List<string> Cart = new List<string>();
@@ -15,7 +27,8 @@ namespace PointOfSale
         {
             
             
-             Product bagOfOranges = new Product("Bag Of Oranges", "produce", "8 pound bag of oranges", 6.99);
+            Product bagOfOranges = new Product("Bag Of Oranges", "produce", "8 pound bag of oranges", 6.99);
+
             Product bagOfLimes = new Product("Bag of Limes", "produce", "1 pound bag of key limes", 3.99);
             Product bagOfSpinach = new Product("Bag of Spinach", "produce", "10 ounce bag of spinach", 2.18);
             
@@ -30,7 +43,7 @@ namespace PointOfSale
             Product GallonOfMilk = new Product("Gallon of 2% Milk", "dairy", "Gallon of fairlife 2% milk", 3.98);
             Product PackOfYogurt = new Product("Yoplait Yogurt", "dairy", "8 pack of Yoplait Strawberry and Banana Yogurt", 4.36);
             Product CoffeeCreamer = new Product("Carmel Macchiato Creamer", "dairy", "32 ounce container of Internation delight coffee creamer", 3.24);
-            
+
             
             List<Product> bread = new List<Product>();
             bread.Add(WhiteBread);
@@ -51,7 +64,9 @@ namespace PointOfSale
             snacks.Add(PopcornBag);
             snacks.Add(BagOfPretzels);
             snacks.Add(Cheezits);
-       
+
+
+            
             bool goAgain = true;
             while (goAgain)
             {
@@ -128,6 +143,7 @@ namespace PointOfSale
                     Sale.Add(price);
                     Console.WriteLine($"Your Total Is{price}");
 
+
                 }
              
                 goAgain = AddMore();
@@ -139,10 +155,7 @@ namespace PointOfSale
             string input = Console.ReadLine();
             return input;
         }
-        public static void GetSnack(string input)
-        {
-          
-        }
+
 
         static bool AddMore()
         {
@@ -152,6 +165,7 @@ namespace PointOfSale
             Console.WriteLine();
             Console.WriteLine($"Your subtotal is: ${sum}");
            
+
             string answer = GetUserInput("Would you like to add more items to your cart? Please enter y/n").ToLower();
 
             if (answer == "y" || answer == "yes")
@@ -166,6 +180,7 @@ namespace PointOfSale
                 Console.WriteLine("I'm sorry I didn't understand that response. Please enter y or n");
                 return AddMore();
 
+
             }
 
         }
@@ -179,5 +194,6 @@ namespace PointOfSale
             }
         }
       
+
     }
 }
