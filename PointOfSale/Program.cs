@@ -169,7 +169,7 @@ namespace PointOfSale
             {
                 PrintCart();
                 GetPayment();
-                Console.WriteLine("Thank you for shopping at *insert store name* please come again");
+                Console.WriteLine("Thank you for shopping at Prethanials please come again");
                 return false;
             }
             else
