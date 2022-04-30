@@ -72,22 +72,22 @@ namespace PointOfSale
                 string input = GetUserInput("Which aisle would you like to shop in? Bread, Dairy, Produce, or Snacks?").ToLower().Trim();
                 switch (input)
                 {
-                    case "bread":
+                    case var s when input.Contains( "bre"):
                         {
                             SelectProduct(bread);
                         }
                         break;
-                    case "dairy":
+                    case var s when input.Contains( "dai"):
                         {
                             SelectProduct(dairy);
                         }
                         break;
-                    case "produce":
+                    case var s when input.Contains( "pro"):
                         {
                             SelectProduct(produce);
                         }
                         break;
-                    case "snacks":
+                    case var s when input.Contains( "sna"):
                         {
                             SelectProduct(snacks);
                         }
@@ -117,7 +117,7 @@ namespace PointOfSale
             double sum = subtotal.Sum();
 
             Console.WriteLine();
-            Console.WriteLine($"Your subtotal is: ${sum}");
+            Console.WriteLine($"Your subtotal is: ${Math.Round (sum,2)}");
 
 
             string answer = GetUserInput("Would you like to add more items to your cart? Please enter y/n").ToLower();
@@ -155,9 +155,9 @@ namespace PointOfSale
                     Console.WriteLine($"{Cart[i]} x{Quantities[i]}  ${Math.Round(Sale[i], 2)}");
                     i++;
                 }
-                Console.WriteLine($"SubTotal ${subtotal.Sum()}");
+                Console.WriteLine($"SubTotal: ${Math.Round(subtotal.Sum(),2)}");
 
-                Console.WriteLine($"Grand Total${grandTotal}");
+                Console.WriteLine($"Grand Total: ${Math.Round(grandTotal,2)}");
                 Console.WriteLine();
 
 
