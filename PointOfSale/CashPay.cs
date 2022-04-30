@@ -25,7 +25,19 @@ namespace PointOfSale
                 }
                
             }
+<<<<<<< Updated upstream
             return Change;
+=======
+            else
+            {
+                Console.WriteLine("I'm sorry that's not the correct amount. Please pay the full amount or select a different form of payment");
+                Program.GetPayment();
+            }
+
+>>>>>>> Stashed changes
         }
     }
+<<<<<<< Updated upstream
 }
+=======
+>>>>>>> Stashed changes

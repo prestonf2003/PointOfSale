@@ -1,15 +1,38 @@
+<<<<<<< Updated upstream
+=======
+using System.Collections.Generic;
+
+>>>>>>> Stashed changes
 
 namespace PointOfSale
 {
     public class Program
     {
+<<<<<<< Updated upstream
         public static string itemQuantity;
         public static List<double> subtotal= new List<double>();
+=======
+
+
+        public static List<double> subtotal = new List<double>();
+
+
+>>>>>>> Stashed changes
 
         public static List<string> Cart = new List<string>();
 
         public static List<double> Sale = new List<double>();
+<<<<<<< Updated upstream
         
+=======
+        public static List<double> Quantities = new List<double>();
+        public static double grandTotal;
+        public static double salesTax;
+
+
+
+
+>>>>>>> Stashed changes
         public static void Main()
         {
 
@@ -51,11 +74,20 @@ namespace PointOfSale
             snacks.Add(BagOfPretzels);
             snacks.Add(Cheezits);
 
+<<<<<<< Updated upstream
             string input = GetUserInput("Which aisle would you like to shop in? Bread, Dairy, Produce, or Snacks?").ToLower().Trim();
             if(input == "bread")
+=======
+
+
+            bool goAgain = true;
+        Menu:
+            while (goAgain)
+>>>>>>> Stashed changes
             {
                 for (int i = 0; i < bread.Count; i++)
                 {
+<<<<<<< Updated upstream
                     Product p = bread[i];
                     Console.WriteLine((i+1)+" "+p.name + " " + "$" + p.price);
                 }
@@ -93,6 +125,36 @@ namespace PointOfSale
             {
                 double round = Math.Round(Sale[i]);
                 Console.WriteLine(Cart[i] + " " + "$" + round);
+=======
+                    case "bread" :
+                        {
+                            SelectProduct(bread);
+                        }
+                        break;
+                    case "dairy":
+                        {
+                            SelectProduct(dairy);
+                        }
+                        break;
+                    case "produce":
+                        {
+                            SelectProduct(produce);
+                        }
+                        break;
+                    case "snacks":
+                        {
+                            SelectProduct(snacks);
+                        }
+                        break;
+                    default:
+                        Console.WriteLine("That is not an acceptable Product please select again");
+                        goto Menu;
+                        break;
+
+                }
+
+                goAgain = AddMore();
+>>>>>>> Stashed changes
 
             }
         }
@@ -123,5 +185,113 @@ namespace PointOfSale
 
         }
 
+<<<<<<< Updated upstream
+=======
+        public static void PrintRecipt()
+        {
+            for (int i = 0; i < Cart.Count; i++)
+            {
+
+                double round = Math.Round(Sale[i], 2);
+                salesTax = Math.Round(subtotal.Sum() * .06, 2);
+                grandTotal = Math.Round(salesTax + subtotal.Sum(), 2);
+                Console.WriteLine();
+                Console.WriteLine("Here is your receipt");
+                foreach (string product in Cart)
+                {
+                    Console.WriteLine($"{Cart[i]} x{Quantities[i]}  ${Math.Round(Sale[i], 2)}");
+                    i++;
+                }
+                Console.WriteLine($"SubTotal ${subtotal.Sum()}");
+
+                Console.WriteLine($"Grand Total${grandTotal}");
+                Console.WriteLine();
+
+
+            }
+        }
+        public static void GetPayment()
+        {
+            string payment = GetUserInput("How would you like to pay").Trim().ToLower();
+
+            switch (payment)
+            {
+                case "check":
+                    {
+                        CheckPay check = new CheckPay(subtotal.Sum(), 0.06, grandTotal, payment);
+                        check.GetTotal();
+                        check.PrintInfo();
+                        PrintRecipt();
+                    }
+                    break;
+                case "credit":
+                    {
+                        CCPay Card = new CCPay(subtotal.Sum(), 0.06, grandTotal, payment);
+
+                        Card.GetTotal();
+                        Card.PrintInfo();
+                        PrintRecipt();
+                    }
+                    break;
+                case "cash":
+                    {
+                        CashPay cash = new CashPay(subtotal.Sum(), 0.06, grandTotal, payment);
+                        cash.GetTotal();
+
+                        cash.PrintInfo();
+                        PrintRecipt();
+                    }
+                    break;
+                default:
+                    {
+
+                        Console.WriteLine("You didnt enter a payment Method");
+                        GetPayment();
+                    }
+                    break;
+            }
+
+        }
+        static void SelectProduct(List<Product> productList)
+        {
+        start:
+            for (int i = 0; i < productList.Count; i++)
+            {
+                Product p = productList[i];
+                Console.WriteLine((i + 1) + " " + p.name + " " + "$" + p.price);
+            }
+            Console.WriteLine();
+            int ChooseItem = int.Parse(GetUserInput("Please select the number of the item you would like"));
+            if (ChooseItem < 0 || ChooseItem > productList.Count)
+            {
+                Console.WriteLine("That was not a valid number please try again");
+                goto start;
+            }
+            Product Chosen = productList[ChooseItem - 1];
+
+
+
+            int QuantityWanted = int.Parse(GetUserInput("How Many"));
+            double price = Chosen.price * QuantityWanted;
+            subtotal.Add(price);
+            Quantities.Add(QuantityWanted);
+            Cart.Add(Chosen.name);
+            Sale.Add(price);
+
+        }
+        static void PrintCart()
+        {
+            salesTax = Math.Round(subtotal.Sum() * .06, 2);
+            grandTotal = Math.Round(salesTax + subtotal.Sum(), 2);
+            Console.WriteLine();
+            Console.WriteLine($"SubTotal ${subtotal.Sum()}");
+
+            Console.WriteLine($"Sales tax ${salesTax}");
+            Console.WriteLine($"Grand Total${grandTotal}");
+            Console.WriteLine();
+
+        }
+
+>>>>>>> Stashed changes
     }
 }
