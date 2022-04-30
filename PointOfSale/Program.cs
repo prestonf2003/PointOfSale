@@ -1,30 +1,18 @@
-<<<<<<< Updated upstream
-=======
 using System.Collections.Generic;
 
->>>>>>> Stashed changes
 
 namespace PointOfSale
 {
     public class Program
     {
-<<<<<<< Updated upstream
-        public static string itemQuantity;
-        public static List<double> subtotal= new List<double>();
-=======
 
 
         public static List<double> subtotal = new List<double>();
 
 
->>>>>>> Stashed changes
 
         public static List<string> Cart = new List<string>();
-
         public static List<double> Sale = new List<double>();
-<<<<<<< Updated upstream
-        
-=======
         public static List<double> Quantities = new List<double>();
         public static double grandTotal;
         public static double salesTax;
@@ -32,15 +20,15 @@ namespace PointOfSale
 
 
 
->>>>>>> Stashed changes
         public static void Main()
         {
 
-            
+
             Product bagOfOranges = new Product("Bag Of Oranges", "produce", "8 pound bag of oranges", 6.99);
+
             Product bagOfLimes = new Product("Bag of Limes", "produce", "1 pound bag of key limes", 3.99);
             Product bagOfSpinach = new Product("Bag of Spinach", "produce", "10 ounce bag of spinach", 2.18);
-            
+
             Product PopcornBag = new Product("Microwave Popcorn", "snacks", "Cousin WIllies Butter Explosion 3 pack microwave popcorn", 2.29);
             Product BagOfPretzels = new Product("Bag of Pretzels", "snacks", "Bag of dots original seasonzed pretzels 16 ounces", 5.99);
             Product Cheezits = new Product("Box of Cheez-Its", "snacks", "21 0unce family size box of original cheez its", 4.54);
@@ -53,7 +41,7 @@ namespace PointOfSale
             Product PackOfYogurt = new Product("Yoplait Yogurt", "dairy", "8 pack of Yoplait Strawberry and Banana Yogurt", 4.36);
             Product CoffeeCreamer = new Product("Carmel Macchiato Creamer", "dairy", "32 ounce container of Internation delight coffee creamer", 3.24);
 
-            
+
             List<Product> bread = new List<Product>();
             bread.Add(WhiteBread);
             bread.Add(SourDough);
@@ -74,59 +62,17 @@ namespace PointOfSale
             snacks.Add(BagOfPretzels);
             snacks.Add(Cheezits);
 
-<<<<<<< Updated upstream
-            string input = GetUserInput("Which aisle would you like to shop in? Bread, Dairy, Produce, or Snacks?").ToLower().Trim();
-            if(input == "bread")
-=======
 
 
             bool goAgain = true;
         Menu:
             while (goAgain)
->>>>>>> Stashed changes
             {
-                for (int i = 0; i < bread.Count; i++)
-                {
-<<<<<<< Updated upstream
-                    Product p = bread[i];
-                    Console.WriteLine((i+1)+" "+p.name + " " + "$" + p.price);
-                }
-            }
-            if(input == "dairy")
-            {
-                for (int i = 0; i < dairy.Count; i++)
-                {
-                    Product p = dairy[i];
-                    Console.WriteLine((i+1) + " " + p.name + " " + "$" + p.price);
-                }
-            }
-            if(input == "produce")
-            {
-                for(int i = 0; i < produce.Count; i++)
-                {
-                    Product p = produce[i];
-                    Console.WriteLine((i + 1) + " " + p.name + " " + "$" + p.price);
-                }
-            }
-            if(input == "snacks")
-            {
-                for(int i = 0; i < snacks.Count; i++)
-                {
-                    Product p = snacks[i];
-                    Console.WriteLine((i + 1) + " " + p.name + " " + "$" + p.price);
-                }
-            }
-            Console.WriteLine(PaymentMethod.Gettotal());
 
-        }
-        public static void PrintCart()
-        {
-            for (int i = 0; i < Cart.Count; i++)
-            {
-                double round = Math.Round(Sale[i]);
-                Console.WriteLine(Cart[i] + " " + "$" + round);
-=======
-                    case "bread" :
+                string input = GetUserInput("Which aisle would you like to shop in? Bread, Dairy, Produce, or Snacks?").ToLower().Trim();
+                switch (input)
+                {
+                    case "bread":
                         {
                             SelectProduct(bread);
                         }
@@ -154,7 +100,6 @@ namespace PointOfSale
                 }
 
                 goAgain = AddMore();
->>>>>>> Stashed changes
 
             }
         }
@@ -165,15 +110,25 @@ namespace PointOfSale
             return input;
         }
 
+
         static bool AddMore()
         {
+
+            double sum = subtotal.Sum();
+
+            Console.WriteLine();
+            Console.WriteLine($"Your subtotal is: ${sum}");
+
+
             string answer = GetUserInput("Would you like to add more items to your cart? Please enter y/n").ToLower();
 
             if (answer == "y" || answer == "yes")
                 return true;
             else if (answer == "n" || answer == "no")
             {
-                
+                PrintCart();
+                GetPayment();
+                Console.WriteLine("Thank you for shopping at Prethanials please come again");
                 return false;
             }
             else
@@ -181,12 +136,11 @@ namespace PointOfSale
                 Console.WriteLine("I'm sorry I didn't understand that response. Please enter y or n");
                 return AddMore();
 
+
             }
 
         }
 
-<<<<<<< Updated upstream
-=======
         public static void PrintRecipt()
         {
             for (int i = 0; i < Cart.Count; i++)
@@ -196,7 +150,6 @@ namespace PointOfSale
                 salesTax = Math.Round(subtotal.Sum() * .06, 2);
                 grandTotal = Math.Round(salesTax + subtotal.Sum(), 2);
                 Console.WriteLine();
-                Console.WriteLine("Here is your receipt");
                 foreach (string product in Cart)
                 {
                     Console.WriteLine($"{Cart[i]} x{Quantities[i]}  ${Math.Round(Sale[i], 2)}");
@@ -261,7 +214,7 @@ namespace PointOfSale
                 Console.WriteLine((i + 1) + " " + p.name + " " + "$" + p.price);
             }
             Console.WriteLine();
-            int ChooseItem = int.Parse(GetUserInput("Please select the number of the item you would like"));
+            int ChooseItem = int.Parse(GetUserInput("Which Item would you like"));
             if (ChooseItem < 0 || ChooseItem > productList.Count)
             {
                 Console.WriteLine("That was not a valid number please try again");
@@ -292,6 +245,6 @@ namespace PointOfSale
 
         }
 
->>>>>>> Stashed changes
     }
 }
+

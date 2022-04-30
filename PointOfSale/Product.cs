@@ -8,15 +8,6 @@ namespace PointOfSale
 {
     class Product
     {
-<<<<<<< Updated upstream
-     
-      public  string name { get; set; }
-      public  string category { get; set; }  
-      public  string description { get; set; }
-      public  double price {  get; set; }
-        
-        
-=======
 
         public string name { get; set; }
         public string category { get; set; }
@@ -25,19 +16,14 @@ namespace PointOfSale
 
 
 
->>>>>>> Stashed changes
         public Product(string name, string category, string description, double price)
         {
-            this.name = name; 
+            this.name = name;
             this.category = category;
             this.description = description;
             this.price = price;
-<<<<<<< Updated upstream
-            
-=======
 
 
->>>>>>> Stashed changes
         }
 
         public virtual void PrintInfo()

@@ -8,23 +8,19 @@ namespace PointOfSale
 {
     class CheckPay : PaymentMethod
     {
-        public int CheckNum { get; set; }
+        public CheckPay(double subTotal, double salesTax, double grandTotal, string Payment) : base(subTotal, salesTax, grandTotal, Payment)
+        {
+        }
 
-        public override double GetTotal()
+        public static string CheckNum { get; set; }
+
+        public override void GetTotal()
         {
             base.GetTotal();
 
-<<<<<<< Updated upstream
-            if(HowtoPay == "check")
-            {
-                Console.WriteLine("Please enter the check number.");
-                
-                CheckNum = int.Parse(Console.ReadLine());
-            }
-=======
 
 
-            Console.WriteLine("Please enter the check number.");
+            Console.WriteLine("Please enter the check amount.");
 
             CheckNum = (Console.ReadLine());
             if (CheckNum.Length == 4)
@@ -33,7 +29,7 @@ namespace PointOfSale
             }
             else
             {
-                Console.WriteLine("Sorry we cannot accept this check. Please input another form of payment, or write a new one.");
+                Console.WriteLine("Sorry we cannot accept this check. Please write another check or choose another form of payment");
                 Program.GetPayment();
             }
 
@@ -41,7 +37,6 @@ namespace PointOfSale
         public void PrintInfo()
         {
             Console.WriteLine(CheckNum);
->>>>>>> Stashed changes
         }
     }
 }
