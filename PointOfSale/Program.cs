@@ -214,7 +214,7 @@ namespace PointOfSale
         }
        static void SelectProduct(List<Product> productList)
         {
-            start:
+            
             for (int i = 0; i < productList.Count; i++)
             {
                 Product p = productList[i];
@@ -225,12 +225,14 @@ namespace PointOfSale
             if(ChooseItem < 0 || ChooseItem > productList.Count)
             {
                 Console.WriteLine("That was not a valid number please try again");
-                goto start;
+                SelectProduct(productList);
             }
                 Product Chosen = productList[ChooseItem - 1];
-            
-                
-              
+   
+
+
+
+
             int QuantityWanted = int.Parse(GetUserInput("How Many"));
             double price = Chosen.price * QuantityWanted;
             subtotal.Add(price);
