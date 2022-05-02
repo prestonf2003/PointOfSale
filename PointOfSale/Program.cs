@@ -249,6 +249,7 @@ namespace PointOfSale
         {
             salesTax = Math.Round(subtotal.Sum() * .06, 2);
             grandTotal = Math.Round(salesTax +subtotal.Sum(), 2);
+            
             Console.WriteLine();
             Console.WriteLine($"SubTotal ${subtotal.Sum()}");
 
