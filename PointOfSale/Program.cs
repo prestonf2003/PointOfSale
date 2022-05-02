@@ -214,31 +214,35 @@ namespace PointOfSale
         }
        static void SelectProduct(List<Product> productList)
         {
-            
+            start:
             for (int i = 0; i < productList.Count; i++)
             {
                 Product p = productList[i];
                 Console.WriteLine((i + 1) + " " + p.name + " " + "$" + p.price);
             }
             Console.WriteLine();
-            int ChooseItem = int.Parse(GetUserInput("Which Item would you like"));
-            if(ChooseItem < 0 || ChooseItem > productList.Count)
+            try
             {
-                Console.WriteLine("That was not a valid number please try again");
-                SelectProduct(productList);
-            }
+                int ChooseItem = int.Parse(GetUserInput("Which Item would you like"));
+                if (ChooseItem < 0 || ChooseItem > productList.Count)
+                {
+                    Console.WriteLine("That was not a valid number please try again");
+                    goto start;
+                }
                 Product Chosen = productList[ChooseItem - 1];
-   
 
-
-
-
-            int QuantityWanted = int.Parse(GetUserInput("How Many"));
-            double price = Chosen.price * QuantityWanted;
-            subtotal.Add(price);
-            Quantities.Add(QuantityWanted);
-            Cart.Add(Chosen.name);
-            Sale.Add(price);
+                int QuantityWanted = int.Parse(GetUserInput("How Many"));
+                double price = Chosen.price * QuantityWanted;
+                subtotal.Add(price);
+                Quantities.Add(QuantityWanted);
+                Cart.Add(Chosen.name);
+                Sale.Add(price);
+            }
+            catch (FormatException e)
+            {
+                Console.WriteLine("I'm sorry that is not a number we can use. Please try again.");
+                goto start;
+            }
 
         }
         static void PrintCart()
