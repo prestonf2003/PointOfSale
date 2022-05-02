@@ -12,7 +12,8 @@ namespace PointOfSale
         {
         }
 
-        public static string CheckNum { get; set; }
+        public static int CheckNum { get; set; }
+       
 
         public override void GetTotal()
         {
@@ -21,9 +22,16 @@ namespace PointOfSale
             
             
                 Console.WriteLine("Please enter the check number.");
-                
-                CheckNum = (Console.ReadLine());
-                if(CheckNum.Length == 4 )
+            try
+            {
+                CheckNum = int.Parse((Console.ReadLine()));
+            }
+            catch (ArgumentException)
+            {
+                Console.WriteLine("Not Valid Try Again");
+                GetTotal();
+            }
+                if(CheckNum > 9999 )
                 {
                     Console.WriteLine("Alright Thank you");
                 }
