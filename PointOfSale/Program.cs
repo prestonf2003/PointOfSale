@@ -67,37 +67,37 @@ namespace PointOfSale
 
 
             bool goAgain = true;
-            Menu:
+          
             while (goAgain)
             {
 
                 string input = GetUserInput("Which aisle would you like to shop in? Bread, Dairy, Produce, or Snacks?").ToLower().Trim();
                 switch (input)
                 {
-                    case "bread":
+                    case var s when input.Contains("bre"):
                         {
                            SelectProduct(bread);
                         }
                         break;
-                    case "dairy":
+                    case var s when input.Contains("dai"):
                         {
                             SelectProduct(dairy);
                         }
                         break;
-                    case "produce":
+                    case var s when input.Contains("pro"):
                         {
                             SelectProduct(produce);
                         }
                         break;
-                    case "snacks":
+                    case var s when input.Contains("sna"):
                         {
                             SelectProduct(snacks);
                         }
                         break;
                      default:
                         Console.WriteLine("That is not an acceptable Product please select again");
-                        goto Menu;
-                        break;
+                        continue;
+                        
 
                 }
  
@@ -116,7 +116,7 @@ namespace PointOfSale
         static bool AddMore()
         {
 
-            double sum = subtotal.Sum();
+            double sum = Math.Round(subtotal.Sum(), 2);
 
             Console.WriteLine();
             Console.WriteLine($"Your subtotal is: ${sum}");
@@ -167,16 +167,19 @@ namespace PointOfSale
         }
         public static void GetPayment()
         {
+            
             string payment = GetUserInput("How would you like to pay").Trim().ToLower();
-
+            Console.WriteLine();
+            
             switch (payment)
             {
                 case "check":
                     {
                         CheckPay check = new CheckPay(subtotal.Sum(), 0.06, grandTotal, payment);
                         check.GetTotal();
-                        check.PrintInfo();
                         PrintRecipt();
+                        check.PrintInfo();
+                      
                     }
                     break;
                 case "credit":
@@ -184,17 +187,18 @@ namespace PointOfSale
                         CCPay Card = new CCPay(subtotal.Sum(), 0.06, grandTotal, payment);
 
                         Card.GetTotal();
-                        Card.PrintInfo();
                         PrintRecipt();
+                        Card.PrintInfo();
+                        
                     }
                     break;
                 case "cash":
                     {
                         CashPay cash = new CashPay(subtotal.Sum(), 0.06, grandTotal, payment);
                         cash.GetTotal();
-
-                        cash.PrintInfo();
                         PrintRecipt();
+                        cash.PrintInfo();
+                        
                     }
                     break;
                 default:
@@ -204,6 +208,7 @@ namespace PointOfSale
                         GetPayment();
                     }
                     break;
+                   
             }
 
         }
