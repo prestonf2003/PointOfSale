@@ -20,7 +20,7 @@ namespace PointOfSale
 
             
             
-                Console.WriteLine("Please enter the check amount.");
+                Console.WriteLine("Please enter the check number.");
                 
                 CheckNum = (Console.ReadLine());
                 if(CheckNum.Length == 4 )

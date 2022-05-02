@@ -151,7 +151,7 @@ namespace PointOfSale
             {
             int m = DateTime.Today.Month;
             int y = DateTime.Today.Year;
-            int expm = int.Parse(GetUserInput("Please enter in you month in single digit or double digit if greater than 9"));
+            int expm = int.Parse(GetUserInput("Please enter in your expiration month in single digit or double digit if greater than 9"));
             int expy = int.Parse(GetUserInput("Please enter the year of expiration in 4 digits"));
          if(expy > y)
             {
