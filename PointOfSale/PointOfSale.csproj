@@ -7,4 +7,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Include="C:\Users\pmanf\Desktop\Grand Circus\Unit 4\PointOfSaleBackup\C-.NET-Full-Time-Syllabus.pdf" Link="C-.NET-Full-Time-Syllabus.pdf" />
+  </ItemGroup>
+
 </Project>
