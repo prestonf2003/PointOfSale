@@ -157,9 +157,9 @@ namespace PointOfSale
                     Console.WriteLine($"{Cart[i]} x{Quantities[i]}  ${Math.Round(Sale[i], 2)}");
                     i++;
                 }
-                Console.WriteLine($"SubTotal ${subtotal.Sum()}");
+                Console.WriteLine($"SubTotal ${Math.Round(subtotal.Sum(),2)}");
                
-                Console.WriteLine($"Grand Total${grandTotal}");
+                Console.WriteLine($"Grand Total${Math.Round(grandTotal,2)}");
                 Console.WriteLine();
                 
 
@@ -168,7 +168,7 @@ namespace PointOfSale
         public static void GetPayment()
         {
             
-            string payment = GetUserInput("How would you like to pay").Trim().ToLower();
+            string payment = GetUserInput("How would you like to pay? Cash, credit, or check:").Trim().ToLower();
             Console.WriteLine();
             
             switch (payment)
@@ -251,10 +251,10 @@ namespace PointOfSale
             grandTotal = Math.Round(salesTax +subtotal.Sum(), 2);
             
             Console.WriteLine();
-            Console.WriteLine($"SubTotal ${subtotal.Sum()}");
+            Console.WriteLine($"SubTotal ${Math.Round(subtotal.Sum(),2)}");
 
             Console.WriteLine($"Sales tax ${salesTax}");
-            Console.WriteLine($"Grand Total${grandTotal}");
+            Console.WriteLine($"Grand Total${Math.Round(grandTotal,2)}");
             Console.WriteLine();
             
         }
