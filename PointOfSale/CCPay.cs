@@ -89,11 +89,12 @@ namespace PointOfSale
             }
 
 
-            static bool CCNumbers()
-            {
-                Console.WriteLine("Please enter your credit card number.");
-                    CCNums = Console.ReadLine();
-                if (CCNums.Length == 16)
+        static bool CCNumbers()
+        {
+            Console.WriteLine("Please enter your credit card number.");
+            CCNums = Console.ReadLine();
+            List<string> nums = new List<string>() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"};
+                if (CCNums.Length == 16 && !nums.Contains(CCNums))
                 {
                     
                     return true;
