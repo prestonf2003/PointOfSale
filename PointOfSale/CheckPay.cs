@@ -31,7 +31,7 @@ namespace PointOfSale
                 Console.WriteLine("Not Valid Try Again");
                 GetTotal();
             }
-                if(CheckNum > 9999 )
+                if(CheckNum < 9999 && CheckNum >= 1000 )
                 {
                     Console.WriteLine("Alright Thank you");
                 }

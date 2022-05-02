@@ -23,7 +23,15 @@ namespace PointOfSale
             
 
             Console.WriteLine($"Your total was {Grandtotal}. How much cash will you be paying with?");
-            Cash = double.Parse(Console.ReadLine());
+            try
+            {
+                Cash = double.Parse(Console.ReadLine());
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Sorry thats not a valid input please try again");
+                GetTotal();
+            }
             if (Cash > Grandtotal)
             {
                 Change = Math.Round(Cash - Grandtotal, 2);
