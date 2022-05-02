@@ -223,14 +223,20 @@ namespace PointOfSale
             Product Chosen = productList[ChooseItem - 1];
 
 
-
-            int QuantityWanted = int.Parse(GetUserInput("How Many"));
-            double price = Chosen.price * QuantityWanted;
-            subtotal.Add(price);
-            Quantities.Add(QuantityWanted);
-            Cart.Add(Chosen.name);
-            Sale.Add(price);
-
+            
+            
+                int QuantityWanted = int.Parse(GetUserInput("How Many"));
+            if(QuantityWanted < 0 || QuantityWanted > productList.Count)
+            {
+                Console.WriteLine("Thats not a valid input try again");
+                SelectProduct(productList);
+            }
+                double price = Chosen.price * QuantityWanted;
+                subtotal.Add(price);
+                Quantities.Add(QuantityWanted);
+                Cart.Add(Chosen.name);
+                Sale.Add(price);
+            
         }
         static void PrintCart()
         {
