@@ -25,8 +25,9 @@ namespace PointOfSale
         {
             base.GetTotal();
 
-           if(CCNumbers() == true && JustCVV() == true && ExpDateCheck() == true)
+            if (CCNumbers() == true && JustCVV() == true && ExpDateCheck() == true)
             {
+
               
                 Console.WriteLine("That Info is correct have a good day");
             }
@@ -67,12 +68,13 @@ namespace PointOfSale
 
 
 
-
-
-
-            //else
-
-            //    Console.WriteLine("Sorry that isn't a valid credit card number. Please input your card again.");
+                Console.WriteLine("That Info is correct have a good day");
+            }
+            else
+            {
+                Program.GetPayment();
+            }
+                                   
         }
         public void PrintInfo()
         {
@@ -81,16 +83,49 @@ namespace PointOfSale
             Console.WriteLine(exp);
         }
 
-            static string GetUserInput(string prompt)
+        static string GetUserInput(string prompt)
+        {
+            Console.WriteLine(prompt);
+            string output = Console.ReadLine();
+            return output;
+        }
+
+
+        static bool CCNumbers()
+        {
+            Console.WriteLine("Please enter your credit card number.");
+            CCNums = Console.ReadLine();
+            if (CCNums.Length == 16)
             {
-                Console.WriteLine(prompt);
-                string output = Console.ReadLine();
-                return output;
+
+                return true;
             }
 
-
-            static bool CCNumbers()
+            else
             {
+                Console.WriteLine("Sorry that isn't a valid credit card number. Please input your card again.");
+                return CCNumbers();
+            }
+        }
+        public void PrintInfo()
+        {
+            Console.WriteLine(CCNums);
+            Console.WriteLine(CVVNums);
+            Console.WriteLine(exp);
+        }
+
+        static bool StartOver()
+        {
+            string input = GetUserInput("Would you like to start over?").ToLower();
+            if (input == "y" || input == "yes")
+            {
+                return true;
+            }
+            else if (input == "n" || input == "no")
+            {
+
+                return false;
+
                 Console.WriteLine("Please enter your credit card number.");
                     CCNums = Console.ReadLine();
                 if (CCNums.Length == 16)
@@ -104,28 +139,31 @@ namespace PointOfSale
                     Console.WriteLine("Sorry that isn't a valid credit card number. Please input your card again.");
                     return CCNumbers();
                 }
-            }
 
-            static bool StartOver()
-            {
-                string input = GetUserInput("Would you like to start over?").ToLower();
-                if (input == "y" || input == "yes")
-                {
-                    return true;
-                }
-                else if (input == "n" || input == "no")
-                {
-                    return false;
-                }
-                else
-                {
-                    Console.WriteLine("I'm sorry I didn't catch that. Please enter 'yes' or 'no'.");
-                            return StartOver();
-                }
             }
-
-            static bool JustCVV()
+            else
             {
+                Console.WriteLine("I'm sorry I didn't catch that. Please enter 'yes' or 'no'.");
+                return StartOver();
+            }
+        }
+
+        static bool JustCVV()
+        {
+            Console.WriteLine("And what is the CVV number?");
+            string CVVNums = Console.ReadLine();
+            if (CVVNums.Length == 3)
+            {
+
+                int CVV2 = int.Parse(CVVNums);
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("I'm sorry. That CVV number doesn't seem to be accurate.");
+                string repeat = GetUserInput("Please enter yes to re-enter the CVV or no to start over with a new card. ").ToLower();
+                if (repeat.Contains("y"))
+
                 Console.WriteLine("And what is the CVV number?");
                 string CVVNums = Console.ReadLine();
                 if (CVVNums.Length == 3)
@@ -134,10 +172,8 @@ namespace PointOfSale
                     return true;
                 }
                 else
+
                 {
-                    Console.WriteLine("I'm sorry. That CVV number doesn't seem to be accurate.");
-                  string repeat = GetUserInput("Please enter yes to re-enter the CVV or no to start over with a new card. ").ToLower();
-                if (repeat.Contains("y")){ 
                     return JustCVV();
                 }
                 else
@@ -145,30 +181,37 @@ namespace PointOfSale
                     return false;
                     return CCNumbers();
                 }
-                }
             }
-             bool ExpDateCheck()
-            {
+        }
+        bool ExpDateCheck()
+        {
             int m = DateTime.Today.Month;
             int y = DateTime.Today.Year;
             int expm = int.Parse(GetUserInput("Please enter in you month in single digit or double digit if greater than 9"));
             int expy = int.Parse(GetUserInput("Please enter the year of expiration in 4 digits"));
-         if(expy > y)
+            if (expy > y)
             {
                 return true;
             }
-         else if(expy == y && expm >= m)
+            else if (expy == y && expm >= m)
             {
                 return true;
             }
             else
             {
+                Console.WriteLine("It looks like this card is expired. Please choose a different card or select a different form of payment.");
                 return false;
             }
+
+            exp = expm + "-" + expy;
+
              exp = expm + "-" + expy;
         }
             
+
         }
 
-
     }
+
+
+}

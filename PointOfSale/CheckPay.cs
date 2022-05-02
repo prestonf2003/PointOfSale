@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PointOfSale
 {
-     class CheckPay : PaymentMethod
+    class CheckPay : PaymentMethod
     {
         public CheckPay(double subTotal, double salesTax, double grandTotal, string Payment) : base(subTotal, salesTax, grandTotal, Payment)
         {
@@ -18,26 +18,34 @@ namespace PointOfSale
         {
             base.GetTotal();
 
-            
-            
-                Console.WriteLine("Please enter the check amount.");
-                
-                CheckNum = (Console.ReadLine());
-                if(CheckNum.Length == 4 )
-                {
-                    Console.WriteLine("Alright Thank you");
-                }
-                else
-                {
-                    Console.WriteLine("Sorry we cannot accept this check please input another form of payment");
-                     Program.GetPayment();
-                }
 
+
+
+            Console.WriteLine("Please enter the check number.");
+
+            CheckNum = (Console.ReadLine());
+            if (CheckNum.Length == 4)
+            {
+                Console.WriteLine("Alright Thank you");
             }
+            else
+            {
+                Console.WriteLine("Sorry we cannot accept this check. Please write another check or choose another form of payment");
+                Program.GetPayment();
+            }
+
+        }
         public void PrintInfo()
         {
             Console.WriteLine(CheckNum);
-        }
+
+            
+            
+               
+
+            
+ 
+
         }
     }
-
+}

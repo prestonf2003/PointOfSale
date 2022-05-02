@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace PointOfSale
 {
-     class Product
+    class Product
     {
-     
-      public  string name { get; set; }
-      public  string category { get; set; }  
-      public  string description { get; set; }
-      public  double price {  get; set; }
-      
+
+        public string name { get; set; }
+        public string category { get; set; }
+        public string description { get; set; }
+        public double price { get; set; }
+
 
 
         public Product(string name, string category, string description, double price)
@@ -22,7 +22,7 @@ namespace PointOfSale
             this.category = category;
             this.description = description;
             this.price = price;
-            
+
 
         }
 
@@ -35,5 +35,5 @@ namespace PointOfSale
             Console.WriteLine();
         }
     }
-  
+
 }

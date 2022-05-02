@@ -1,5 +1,3 @@
-
-
 using System.Collections.Generic;
 
 
@@ -11,15 +9,14 @@ namespace PointOfSale
 
         public static List<double> subtotal = new List<double>();
 
-       
+
 
         public static List<string> Cart = new List<string>();
         public static List<double> Sale = new List<double>();
         public static List<double> Quantities = new List<double>();
         public static double grandTotal;
         public static double salesTax;
-        
-        
+
 
 
         public static void Main()
@@ -67,40 +64,51 @@ namespace PointOfSale
 
 
             bool goAgain = true;
+
             Menu:
+
             while (goAgain)
             {
 
                 string input = GetUserInput("Which aisle would you like to shop in? Bread, Dairy, Produce, or Snacks?").ToLower().Trim();
                 switch (input)
                 {
-                    case "bread":
+
+                    case var s when input.Contains( "bre"):
                         {
-                           SelectProduct(bread);
+                            SelectProduct(bread);
                         }
                         break;
-                    case "dairy":
+                    case var s when input.Contains( "dai"):
+
                         {
                             SelectProduct(dairy);
                         }
                         break;
-                    case "produce":
+
+                    case var s when input.Contains( "pro"):
+
                         {
                             SelectProduct(produce);
                         }
                         break;
-                    case "snacks":
+
+                    case var s when input.Contains( "sna"):
+
                         {
                             SelectProduct(snacks);
                         }
                         break;
-                     default:
+
+                    default:
+                    {
                         Console.WriteLine("That is not an acceptable Product please select again");
-                        goto Menu;
+                        continue;
+                    }
                         break;
 
                 }
- 
+
                 goAgain = AddMore();
 
             }
@@ -119,7 +127,7 @@ namespace PointOfSale
             double sum = subtotal.Sum();
 
             Console.WriteLine();
-            Console.WriteLine($"Your subtotal is: ${sum}");
+            Console.WriteLine($"Your subtotal is: ${Math.Round (sum,2)}");
 
 
             string answer = GetUserInput("Would you like to add more items to your cart? Please enter y/n").ToLower();
@@ -147,21 +155,24 @@ namespace PointOfSale
         {
             for (int i = 0; i < Cart.Count; i++)
             {
-                
+
                 double round = Math.Round(Sale[i], 2);
-                 salesTax = Math.Round(subtotal.Sum() * .06, 2);
-                 grandTotal = Math.Round(salesTax + subtotal.Sum(), 2);
+                salesTax = Math.Round(subtotal.Sum() * .06, 2);
+                grandTotal = Math.Round(salesTax + subtotal.Sum(), 2);
+
                 Console.WriteLine();
                 foreach (string product in Cart)
                 {
                     Console.WriteLine($"{Cart[i]} x{Quantities[i]}  ${Math.Round(Sale[i], 2)}");
                     i++;
                 }
+
                 Console.WriteLine($"SubTotal ${subtotal.Sum()}");
                
                 Console.WriteLine($"Grand Total${grandTotal}");
                 Console.WriteLine();
                 
+
 
             }
         }
@@ -193,6 +204,7 @@ namespace PointOfSale
                         CashPay cash = new CashPay(subtotal.Sum(), 0.06, grandTotal, payment);
                         cash.GetTotal();
 
+
                         cash.PrintInfo();
                         PrintRecipt();
                     }
@@ -207,6 +219,7 @@ namespace PointOfSale
             }
 
         }
+
        static void SelectProduct(List<Product> productList)
         {
             start:
@@ -237,15 +250,18 @@ namespace PointOfSale
         static void PrintCart()
         {
             salesTax = Math.Round(subtotal.Sum() * .06, 2);
-            grandTotal = Math.Round(salesTax +subtotal.Sum(), 2);
+
+            grandTotal = Math.Round(salesTax + subtotal.Sum(), 2);
+
             Console.WriteLine();
             Console.WriteLine($"SubTotal ${subtotal.Sum()}");
 
             Console.WriteLine($"Sales tax ${salesTax}");
             Console.WriteLine($"Grand Total${grandTotal}");
             Console.WriteLine();
-            
+
         }
 
     }
 }
+
