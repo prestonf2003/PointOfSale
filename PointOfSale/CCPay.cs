@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace PointOfSale
@@ -94,7 +95,7 @@ namespace PointOfSale
             Console.WriteLine("Please enter your credit card number.");
             CCNums = Console.ReadLine();
             List<string> nums = new List<string>() {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"};
-                if (CCNums.Length == 16 && nums.Contains(CCNums))
+            if (CCNums.Length == 16 && Regex.IsMatch(CCNums, @"^\d+$"))
                 {
                     
                     return true;
