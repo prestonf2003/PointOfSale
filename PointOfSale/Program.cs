@@ -19,7 +19,6 @@ namespace PointOfSale
 
 
 
-
         public static void Main()
         {
 
@@ -65,36 +64,47 @@ namespace PointOfSale
 
 
             bool goAgain = true;
-        Menu:
+
+            Menu:
+
             while (goAgain)
             {
 
                 string input = GetUserInput("Which aisle would you like to shop in? Bread, Dairy, Produce, or Snacks?").ToLower().Trim();
                 switch (input)
                 {
+
                     case var s when input.Contains( "bre"):
                         {
                             SelectProduct(bread);
                         }
                         break;
                     case var s when input.Contains( "dai"):
+
                         {
                             SelectProduct(dairy);
                         }
                         break;
+
                     case var s when input.Contains( "pro"):
+
                         {
                             SelectProduct(produce);
                         }
                         break;
+
                     case var s when input.Contains( "sna"):
+
                         {
                             SelectProduct(snacks);
                         }
                         break;
+
                     default:
+                    {
                         Console.WriteLine("That is not an acceptable Product please select again");
-                        goto Menu;
+                        continue;
+                    }
                         break;
 
                 }
@@ -149,16 +159,19 @@ namespace PointOfSale
                 double round = Math.Round(Sale[i], 2);
                 salesTax = Math.Round(subtotal.Sum() * .06, 2);
                 grandTotal = Math.Round(salesTax + subtotal.Sum(), 2);
+
                 Console.WriteLine();
                 foreach (string product in Cart)
                 {
                     Console.WriteLine($"{Cart[i]} x{Quantities[i]}  ${Math.Round(Sale[i], 2)}");
                     i++;
                 }
-                Console.WriteLine($"SubTotal: ${Math.Round(subtotal.Sum(),2)}");
 
-                Console.WriteLine($"Grand Total: ${Math.Round(grandTotal,2)}");
+                Console.WriteLine($"SubTotal ${subtotal.Sum()}");
+               
+                Console.WriteLine($"Grand Total${grandTotal}");
                 Console.WriteLine();
+                
 
 
             }
@@ -191,6 +204,7 @@ namespace PointOfSale
                         CashPay cash = new CashPay(subtotal.Sum(), 0.06, grandTotal, payment);
                         cash.GetTotal();
 
+
                         cash.PrintInfo();
                         PrintRecipt();
                     }
@@ -205,9 +219,10 @@ namespace PointOfSale
             }
 
         }
-        static void SelectProduct(List<Product> productList)
+
+       static void SelectProduct(List<Product> productList)
         {
-        start:
+            start:
             for (int i = 0; i < productList.Count; i++)
             {
                 Product p = productList[i];
@@ -215,33 +230,29 @@ namespace PointOfSale
             }
             Console.WriteLine();
             int ChooseItem = int.Parse(GetUserInput("Which Item would you like"));
-            if (ChooseItem < 0 || ChooseItem > productList.Count)
+            if(ChooseItem < 0 || ChooseItem > productList.Count)
             {
                 Console.WriteLine("That was not a valid number please try again");
                 goto start;
             }
-            Product Chosen = productList[ChooseItem - 1];
+                Product Chosen = productList[ChooseItem - 1];
+            
+                
+              
+            int QuantityWanted = int.Parse(GetUserInput("How Many"));
+            double price = Chosen.price * QuantityWanted;
+            subtotal.Add(price);
+            Quantities.Add(QuantityWanted);
+            Cart.Add(Chosen.name);
+            Sale.Add(price);
 
-
-            
-            
-                int QuantityWanted = int.Parse(GetUserInput("How Many"));
-            if(QuantityWanted < 0 || QuantityWanted > productList.Count)
-            {
-                Console.WriteLine("Thats not a valid input try again");
-                SelectProduct(productList);
-            }
-                double price = Chosen.price * QuantityWanted;
-                subtotal.Add(price);
-                Quantities.Add(QuantityWanted);
-                Cart.Add(Chosen.name);
-                Sale.Add(price);
-            
         }
         static void PrintCart()
         {
             salesTax = Math.Round(subtotal.Sum() * .06, 2);
+
             grandTotal = Math.Round(salesTax + subtotal.Sum(), 2);
+
             Console.WriteLine();
             Console.WriteLine($"SubTotal ${subtotal.Sum()}");
 

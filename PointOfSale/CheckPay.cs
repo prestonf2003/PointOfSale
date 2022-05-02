@@ -20,6 +20,7 @@ namespace PointOfSale
 
 
 
+
             Console.WriteLine("Please enter the check number.");
 
             CheckNum = (Console.ReadLine());
@@ -37,6 +38,14 @@ namespace PointOfSale
         public void PrintInfo()
         {
             Console.WriteLine(CheckNum);
+
+            
+            
+               
+
+            
+ 
+
         }
     }
 }

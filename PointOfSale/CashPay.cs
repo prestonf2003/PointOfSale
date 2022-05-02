@@ -18,6 +18,7 @@ namespace PointOfSale
 
 
 
+    
         public override void GetTotal()
         {
 
@@ -28,6 +29,7 @@ namespace PointOfSale
             {
                 Change = Math.Round(Cash - Grandtotal, 2);
                 Console.WriteLine($"Your change is {Change}");
+
             }
 
             else if (Cash == Grandtotal)
@@ -38,6 +40,10 @@ namespace PointOfSale
             {
                 Console.WriteLine("I'm sorry that's not the correct amount. Please pay the full amount or select a different form of payment.");
                 Program.GetPayment();
+
+            }
+
+
             }
 
         }
@@ -47,4 +53,9 @@ namespace PointOfSale
             Console.WriteLine($"Cash Returned {Change}");
         }
     }
+
 }
+
+    }
+
+
